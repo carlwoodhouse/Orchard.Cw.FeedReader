@@ -1,0 +1,8 @@
+﻿Name: Orchard.Cw.FeedReader
+AntiForgery: enabled
+Author: Carl Woodouse
+Website: http://www.carlwoodhouse.com
+Version: 1.0
+OrchardVersion: 1.6
+Category: Orchard.Cw.Modules
+Description: Description for the moduleRemote Rss Consumer
