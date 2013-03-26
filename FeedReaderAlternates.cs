@@ -55,7 +55,6 @@ namespace Orchard.Cw.FeedReader
                                                          ? string.Concat("_", displayType)
                                                          : string.Empty;
 
-                                       // blog name alternate
                                        var alternates = new List<string>
                                            {
                                                prefix,
