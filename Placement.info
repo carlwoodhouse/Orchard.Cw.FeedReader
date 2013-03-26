@@ -1,4 +1,4 @@
 <Placement>
     <Place Parts_RemoteRss="Content"/>
-    <Place Parts_RemoteRss_Edit="Content"/>
+    <Place Parts_RemoteRss_Edit="Content:5"/>
 </Placement>
