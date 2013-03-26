@@ -12,6 +12,7 @@ namespace Orchard.Cw.FeedReader
     using Orchard;
     using Orchard.ContentManagement;
     using Orchard.DisplayManagement.Descriptors;
+    using Orchard.Widgets.Models;
 
     public class FeedReaderAlternates : IShapeTableProvider
     {
@@ -41,9 +42,13 @@ namespace Orchard.Cw.FeedReader
 
                                    if (feedPart != null)
                                    {
+                                       var title = feedPart.Has<WidgetPart>()
+                                                       ? feedPart.As<WidgetPart>().Name
+                                                       : feedPart.RemoteRssUrl;
+
                                        var prefix = string.Concat(
                                            "Parts_RemoteRss_",
-                                           SanitiseAlternateTitle(feedPart.RemoteRssUrl));
+                                           SanitiseAlternateTitle(title));
 
                                        var displayType = displaying.ShapeMetadata.DisplayType;
                                        displayType = !string.IsNullOrEmpty(displayType)
@@ -73,8 +78,9 @@ namespace Orchard.Cw.FeedReader
         /// <returns>a sanatised string</returns>
         private static string SanitiseAlternateTitle(string title)
         {
+            title = title.ToLower().Replace("https", string.Empty).Replace("http", string.Empty).Trim();
             var rgx = new Regex("[^a-zA-Z0-9]");
-            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(rgx.Replace(title, string.Empty).ToLower().Replace("https", string.Empty).Replace("http", string.Empty).Trim());
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(rgx.Replace(title, string.Empty));
         }
     }
 }
