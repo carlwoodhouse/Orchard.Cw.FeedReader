@@ -26,7 +26,7 @@ namespace Orchard.Cw.FeedReader
         /// <param name="builder">The builder.</param>
         public void Discover(ShapeTableBuilder builder)
         {
-            builder.Describe("Widget")
+            builder.Describe("Parts_RemoteRss")
                 .OnDisplaying(displaying =>
                    {
                        ContentItem contentItem = displaying.Shape.ContentItem;
