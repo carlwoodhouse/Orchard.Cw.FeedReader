@@ -7,6 +7,8 @@ using Orchard.Environment.Extensions;
 using Orchard.Services;
 
 namespace Orchard.Cw.FeedReader.Services {
+    using Orchard.Cw.FeedReader.Extensions;
+
     public interface IRemoteRssService : IDependency {
         XElement GetFeed(RemoteRssPart remoteRss);
     }
@@ -26,10 +28,14 @@ namespace Orchard.Cw.FeedReader.Services {
                                          s => {
                                              s.Monitor(_clock.When(TimeSpan.FromMinutes(remoteRss.CacheDuration)));
                                              var f = XElement.Load(remoteRss.RemoteRssUrl);
-                                             return f;
+                                             return f.RemoveAllXmlNamespace();
                                          }
                 );
+         
+
             return feed;
+
+           
         }
     }
 }
