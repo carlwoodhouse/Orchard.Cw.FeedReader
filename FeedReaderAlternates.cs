@@ -1,80 +1,80 @@
 ﻿
 
-//using Orchard.Cw.FeedReader.Models;
+using Orchard.Cw.FeedReader.Models;
 
-//namespace Orchard.Cw.FeedReader
-//{
-//    using System.Collections.Generic;
-//    using System.Globalization;
-//    using System.Linq;
-//    using System.Text.RegularExpressions;
+namespace Orchard.Cw.FeedReader
+{
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text.RegularExpressions;
 
-//    using Orchard;
-//    using Orchard.ContentManagement;
-//    using Orchard.DisplayManagement.Descriptors;
+    using Orchard;
+    using Orchard.ContentManagement;
+    using Orchard.DisplayManagement.Descriptors;
 
-//    public class FeedReaderAlternates : IShapeTableProvider
-//    {
-//        private readonly IWorkContextAccessor workContextAccessor;
+    public class FeedReaderAlternates : IShapeTableProvider
+    {
+        private readonly IWorkContextAccessor workContextAccessor;
 
-//        public FeedReaderAlternates(IWorkContextAccessor workContextAccessor)
-//        {
-//            this.workContextAccessor = workContextAccessor;
-//        }
+        public FeedReaderAlternates(IWorkContextAccessor workContextAccessor)
+        {
+            this.workContextAccessor = workContextAccessor;
+        }
 
-//        /// <summary>Create the alternates!</summary>
-//        /// <param name="builder">The builder.</param>
-//        public void Discover(ShapeTableBuilder builder)
-//        {
-//            builder.Describe("Content")
-//                .OnDisplaying(displaying =>
-//                   {
-//                       ContentItem contentItem = displaying.Shape.ContentItem;
-//                       if (contentItem != null)
-//                       {
-//                           if (contentItem.Is<RemoteRssPart>())
-//                           {
-//                               if (!string.IsNullOrEmpty(displaying.ShapeMetadata.DisplayType))
-//                               {
+        /// <summary>Create the alternates!</summary>
+        /// <param name="builder">The builder.</param>
+        public void Discover(ShapeTableBuilder builder)
+        {
+            builder.Describe("Widget")
+                .OnDisplaying(displaying =>
+                   {
+                       ContentItem contentItem = displaying.Shape.ContentItem;
+                       if (contentItem != null)
+                       {
+                           if (contentItem.Is<RemoteRssPart>())
+                           {
+                               if (!string.IsNullOrEmpty(displaying.ShapeMetadata.DisplayType))
+                               {
 
-//                                   var feedPart = contentItem.As<RemoteRssPart>();
+                                   var feedPart = contentItem.As<RemoteRssPart>();
 
-//                                   if (feedPart != null)
-//                                   {
-//                                       var prefix = string.Concat(
-//                                           "Parts_RemoteRss_",
-//                                           SanitiseAlternateTitle(feedPart.RemoteRssUrl));
+                                   if (feedPart != null)
+                                   {
+                                       var prefix = string.Concat(
+                                           "Parts_RemoteRss_",
+                                           SanitiseAlternateTitle(feedPart.RemoteRssUrl));
 
-//                                       var displayType = displaying.ShapeMetadata.DisplayType;
-//                                       displayType = !string.IsNullOrEmpty(displayType)
-//                                                         ? string.Concat("_", displayType)
-//                                                         : string.Empty;
+                                       var displayType = displaying.ShapeMetadata.DisplayType;
+                                       displayType = !string.IsNullOrEmpty(displayType)
+                                                         ? string.Concat("_", displayType)
+                                                         : string.Empty;
 
-//                                       // blog name alternate
-//                                       var alternates = new List<string>
-//                                           {
-//                                               prefix,
-//                                               string.Concat(prefix, displayType)
-//                                           };
+                                       // blog name alternate
+                                       var alternates = new List<string>
+                                           {
+                                               prefix,
+                                               string.Concat(prefix, displayType)
+                                           };
 
-//                                       foreach (var alternate in alternates.Distinct().Where(alternate => !displaying.ShapeMetadata.Alternates.Contains(alternate)))
-//                                       {
-//                                           displaying.ShapeMetadata.Alternates.Add(alternate);
-//                                       }
-//                                   }
-//                               }
-//                           }
-//                       }
-//                   });
-//        }
+                                       foreach (var alternate in alternates.Distinct().Where(alternate => !displaying.ShapeMetadata.Alternates.Contains(alternate)))
+                                       {
+                                           displaying.ShapeMetadata.Alternates.Add(alternate);
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   });
+        }
 
-//        /// <summary>Sanatise the Alternate Name from the title</summary>
-//        /// <param name="title">The title.</param>
-//        /// <returns>a sanatised string</returns>
-//        private static string SanitiseAlternateTitle(string title)
-//        {
-//            var rgx = new Regex("[^a-zA-Z0-9]");
-//            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(rgx.Replace(title, string.Empty).ToLower().Trim());
-//        }
-//    }
-//}
+        /// <summary>Sanatise the Alternate Name from the title</summary>
+        /// <param name="title">The title.</param>
+        /// <returns>a sanatised string</returns>
+        private static string SanitiseAlternateTitle(string title)
+        {
+            var rgx = new Regex("[^a-zA-Z0-9]");
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(rgx.Replace(title, string.Empty).ToLower().Replace("https", string.Empty).Replace("http", string.Empty).Trim());
+        }
+    }
+}
