@@ -2,6 +2,7 @@
 using Orchard.ContentManagement.Drivers;
 using Orchard.Cw.FeedReader.Models;
 using Orchard.Cw.FeedReader.Services;
+using System;
 
 namespace Orchard.Cw.FeedReader.Drivers {
     public class RemoteRssPartDriver : ContentPartDriver<RemoteRssPart> {
@@ -51,16 +52,16 @@ namespace Orchard.Cw.FeedReader.Drivers {
 
             var count = context.Attribute(part.PartDefinition.Name, "ItemsToDisplay");
             if (count != null) {
-                part.ItemsToDisplay = Convert.ToInt32(ItemsToDisplay);
+                part.ItemsToDisplay = Convert.ToInt32(count);
             }
 			
 			var cacheDuration = context.Attribute(part.PartDefinition.Name, "CacheDuration");
             if (cacheDuration != null) {
-                part.cacheDuration = Convert.ToInt32(cacheDuration);
+                part.CacheDuration = Convert.ToInt32(cacheDuration);
             }
         }
 
-        protected override void Exporting(RecentBlogPostsPart part, ExportContentContext context) {
+        protected override void Exporting(RemoteRssPart part, ExportContentContext context) {
             context.Element(part.PartDefinition.Name).SetAttributeValue("RemoteRssUrl", part.RemoteRssUrl);
             context.Element(part.PartDefinition.Name).SetAttributeValue("ItemsToDisplay", part.ItemsToDisplay);
 			context.Element(part.PartDefinition.Name).SetAttributeValue("CacheDuration", part.CacheDuration);
