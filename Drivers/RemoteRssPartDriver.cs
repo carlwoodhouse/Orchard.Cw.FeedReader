@@ -45,5 +45,25 @@ namespace Orchard.Cw.FeedReader.Drivers {
             updater.TryUpdateModel(part, Prefix, null, null);
             return Editor(part, shapeHelper);
         }
+		
+		protected override void Importing(RemoteRssPart part, ImportContentContext context) {
+			part.RemoteRssUrl = context.Attribute(part.PartDefinition.Name, "RemoteRssUrl");
+
+            var count = context.Attribute(part.PartDefinition.Name, "ItemsToDisplay");
+            if (count != null) {
+                part.ItemsToDisplay = Convert.ToInt32(ItemsToDisplay);
+            }
+			
+			var cacheDuration = context.Attribute(part.PartDefinition.Name, "CacheDuration");
+            if (cacheDuration != null) {
+                part.cacheDuration = Convert.ToInt32(cacheDuration);
+            }
+        }
+
+        protected override void Exporting(RecentBlogPostsPart part, ExportContentContext context) {
+            context.Element(part.PartDefinition.Name).SetAttributeValue("RemoteRssUrl", part.RemoteRssUrl);
+            context.Element(part.PartDefinition.Name).SetAttributeValue("ItemsToDisplay", part.ItemsToDisplay);
+			context.Element(part.PartDefinition.Name).SetAttributeValue("CacheDuration", part.CacheDuration);
+        }
     }
 }
