@@ -3,6 +3,7 @@ using Orchard.ContentManagement.Records;
 using Orchard.Environment.Extensions;
 
 namespace Orchard.Cw.FeedReader.Models {
+    // - this will go soon
     public class RemoteRssPartRecord : ContentPartRecord {
         public RemoteRssPartRecord() {
             ItemsToDisplay = 5;
@@ -16,18 +17,18 @@ namespace Orchard.Cw.FeedReader.Models {
 
     public class RemoteRssPart : ContentPart<RemoteRssPartRecord> {
         public string RemoteRssUrl {
-            get { return Record.RemoteRssUrl; }
-            set { Record.RemoteRssUrl = value; }
+            get { return this.Retrive(x => x.RemoteRssUrl); }
+            set { this.Store(x => x.RemoteRssUrl, value); }
         }
 
         public int ItemsToDisplay {
-            get { return Record.ItemsToDisplay; }
-            set { Record.ItemsToDisplay = value; }
+            get { return this.Retrive(x => x.ItemsToDisplay); }
+            set { this.Store(x => x.ItemsToDisplay, value); }
         }
 
         public int CacheDuration {
-            get { return Record.CacheDuration; }
-            set { Record.CacheDuration = value; }
+            get { return this.Retrive(x => x.CacheDuration); }
+            set { this.Store(x => x.CacheDuration, value); }
         }
     }
 }

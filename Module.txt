@@ -1,9 +1,9 @@
 ﻿Name: Orchard.Cw.FeedReader
 AntiForgery: enabled
 Author: Carl Woodouse
-Website: http://www.carlwoodhouse.com
-Version: 1.0
-OrchardVersion: 1.6
+Website: http://carlwoodhouse.com
+Version: 1.1
+OrchardVersion: 1.9.0
 Category: Orchard.Cw.Modules
 Description: Description for the moduleRemote Rss Consumer
 Dependencies: Orchard.Widgets
