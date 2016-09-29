@@ -26,7 +26,7 @@ namespace Orchard.Cw.FeedReader.Drivers {
                     ItemsToDisplay: part.ItemsToDisplay,
                     Feed: _remoteRss.GetFeed(part),
                     ContentItem: part.ContentItem
-                    ));
+                ));
             }
             return new DriverResult();
         }
