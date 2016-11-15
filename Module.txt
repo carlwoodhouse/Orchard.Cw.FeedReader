@@ -5,5 +5,5 @@ Website: http://carlwoodhouse.com
 Version: 1.2
 OrchardVersion: 1.10.1
 Category: Syndication
-Description: Consumes remote rss, spits it out in a pretty widget
-Dependencies: Orchard.Widgets
+Description: Consumes remote rss, spits it out in a pretty widget or element
+Dependencies: Orchard.Widgets, Orchard.Layouts

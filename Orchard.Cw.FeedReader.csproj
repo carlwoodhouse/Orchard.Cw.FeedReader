@@ -108,28 +108,37 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Layouts\Orchard.Layouts.csproj">
+      <Project>{6BD8B2FA-F2E3-4AC8-A4C3-2925A653889A}</Project>
+      <Name>Orchard.Layouts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.Widgets\Orchard.Widgets.csproj">
       <Project>{194D3CCC-1153-474D-8176-FDE8D7D0D0BD}</Project>
       <Name>Orchard.Widgets</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drivers\RemoteRssFeedElementDriver.cs" />
     <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="FeedReaderAlternates.cs" />
     <Compile Include="Drivers\RemoteRssPartDriver.cs" />
     <Compile Include="Migrations.cs" />
+    <Compile Include="Models\RemoteRssFeedElement.cs" />
     <Compile Include="Models\RemoteRssPart.cs" />
     <Compile Include="Services\RemoteRssService.cs" />
+    <Compile Include="ViewModels\RemoteRssFeedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts\RemoteRss.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.RemoteRss.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Parts\RemoteRss.cshtml" />
+    <Content Include="Views\Parts.RemoteRss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Placement.info" />
+    <Content Include="Views\EditorTemplates\Elements.RemoteRssFeedElement.cshtml" />
+    <Content Include="Views\Elements.RemoteRssFeedElement.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Orchard.ContentManagement;
 using Orchard.Cw.FeedReader.Models;
 using Orchard.DisplayManagement.Descriptors;
+using Orchard.Layouts.Framework.Elements;
 using Orchard.Widgets.Models;
 
 namespace Orchard.Cw.FeedReader {
@@ -16,6 +17,15 @@ namespace Orchard.Cw.FeedReader {
         }
 
         public void Discover(ShapeTableBuilder builder) {
+            builder.Describe("Element").OnDisplaying(context => {
+                if (context.Shape.Element.Type == "Orchard.Cw.FeedReader.Models.RemoteRssFeedElement") {
+                    if (!string.IsNullOrEmpty((string)context.Shape.Element.AlternateShapeName)) {
+                        context.ShapeMetadata.Alternates.Add(string.Concat("Elements_RemoteRssFeedElement_",
+                            (string)context.Shape.Element.AlternateShapeName));
+                    }
+                }
+            });
+
             builder.Describe("Parts_RemoteRss")
                 .OnDisplaying(displaying => {
                     ContentItem contentItem = displaying.Shape.ContentItem;

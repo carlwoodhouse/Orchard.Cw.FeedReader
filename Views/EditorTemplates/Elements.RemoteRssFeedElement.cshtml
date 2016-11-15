@@ -1,0 +1,25 @@
+﻿@model Orchard.Cw.FeedReader.ViewModels.RemoteRssFeedViewModel
+
+<fieldset>
+    @Html.LabelFor(m => m.RemoteUrl, T("Remote Url"))
+    @Html.TextBoxFor(m => m.RemoteUrl)
+    @Html.Hint(T("The remote rss feed url."))
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.AlternateShapeName, T("Alternate Shape Name"))
+    @Html.TextBoxFor(m => m.AlternateShapeName)
+    @Html.Hint(T("This will be used to provide alternates"))
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.CacheDuration, T("Cache Duration"))
+    @Html.TextBoxFor(m => m.CacheDuration, new { @class = "text small" })
+    @Html.Hint(T("The length of the cache of the remote results (in minutes)."))
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.ItemCount, T("Item Count"))
+    @Html.TextBoxFor(m => m.ItemCount, new { @class = "text small" })
+    @Html.Hint(T("The number of items to display."))
+</fieldset>
